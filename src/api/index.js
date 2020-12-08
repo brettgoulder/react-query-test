@@ -21,9 +21,9 @@ export const createUser = (user) => {
     .json((res) => res.user);
 };
 
-export const updateUser = ({ id, user }) => {
+export const updateUser = (user) => {
   return wretch()
-    .url(`/api/users/${id}`)
+    .url(`/api/users/${user.id}`)
     .patch(JSON.stringify(user))
     .json((res) => res.user);
 };

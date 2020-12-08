@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UserForm from "../components/UserForm";
 
 export default function CreateUser() {
-  const { mutate } = useCreateUser();
+  const { mutateAsync } = useCreateUser();
   const navigate = useNavigate();
 
   const initialValues = {
@@ -11,8 +11,8 @@ export default function CreateUser() {
     lastName: "",
   };
 
-  const handleSubmit = (user) => {
-    mutate(user);
+  const handleSubmit = async (user) => {
+    await mutateAsync(user);
     navigate("/");
   };
 

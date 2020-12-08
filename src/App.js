@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ReactQueryDevtools } from "react-query-devtools";
 import UserList from "./pages/UserList";
 import UpdateUser from "./pages/UpdateUser";
 import CreateUser from "./pages/CreateUser";
@@ -13,7 +14,12 @@ function AppRoutes() {
 }
 
 function App() {
-  return <AppRoutes />;
+  return (
+    <>
+      <AppRoutes />
+      <ReactQueryDevtools />
+    </>
+  );
 }
 
 export default App;

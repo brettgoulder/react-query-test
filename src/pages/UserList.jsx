@@ -1,8 +1,11 @@
 import { useUsers } from "../hooks";
+import { useQueryClient } from "react-query";
+import { fetchUser } from "../api";
 import { Link } from "react-router-dom";
 
 export default function UserList() {
   const { data: users, isLoading, isSuccess } = useUsers();
+  const queryClient = useQueryClient();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -26,7 +29,20 @@ export default function UserList() {
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
                   <td>
-                    <Link to={`/users/${user.id}/edit`}>Edit</Link>
+                    <Link
+                      to={`/users/${user.id}/edit`}
+                      onMouseOver={() => {
+                        queryClient.prefetchQuery(
+                          ["users", user.id],
+                          () => fetchUser(user.id),
+                          {
+                            staleTime: 5 * 60 * 1000,
+                          }
+                        );
+                      }}
+                    >
+                      Edit
+                    </Link>
                   </td>
                 </tr>
               ))}

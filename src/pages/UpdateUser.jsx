@@ -4,7 +4,7 @@ import UserForm from "../components/UserForm";
 
 export default function UpdateUser() {
   const { id } = useParams();
-  const { mutate } = useUpdateUser();
+  const { mutateAsync } = useUpdateUser();
   const { data, isSuccess, isLoading } = useUserDetail(id);
   const navigate = useNavigate();
 
@@ -15,8 +15,8 @@ export default function UpdateUser() {
   if (isSuccess) {
     const initialValues = data;
 
-    const handleSubmit = (user) => {
-      mutate({ id, user });
+    const handleSubmit = async (user) => {
+      await mutateAsync(user);
       navigate("/");
     };
 
